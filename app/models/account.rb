@@ -1,5 +1,5 @@
 class Account < ApplicationRecord
-  belongs_to :group
+  has_one :member
 
   validates :email, presence: true # TODO: Email のフォーマットバリデーション
 end
