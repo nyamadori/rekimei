@@ -15,10 +15,8 @@ ActiveRecord::Schema.define(version: 20161205142810) do
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email"
     t.string   "encrypted_password"
-    t.integer  "group_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["group_id"], name: "index_accounts_on_group_id", using: :btree
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -29,5 +27,4 @@ ActiveRecord::Schema.define(version: 20161205142810) do
     t.index ["slug"], name: "index_groups_on_slug", unique: true, using: :btree
   end
 
-  add_foreign_key "accounts", "groups"
 end
