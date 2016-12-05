@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205142810) do
+ActiveRecord::Schema.define(version: 20161205151059) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email"
@@ -27,4 +27,16 @@ ActiveRecord::Schema.define(version: 20161205142810) do
     t.index ["slug"], name: "index_groups_on_slug", unique: true, using: :btree
   end
 
+  create_table "members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "account_id"
+    t.integer  "group_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_members_on_account_id", using: :btree
+    t.index ["group_id", "account_id"], name: "index_members_on_group_id_and_account_id", unique: true, using: :btree
+    t.index ["group_id"], name: "index_members_on_group_id", using: :btree
+  end
+
+  add_foreign_key "members", "accounts"
+  add_foreign_key "members", "groups"
 end
