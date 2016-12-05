@@ -1,0 +1,4 @@
+attributes:
+  - foreign_keys
+  - primary_keys
+  - content
