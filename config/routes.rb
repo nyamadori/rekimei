@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :groups, path: '/', param: :slug do
+    resources :members do
+      resource :session, only: [:destroy, :new, :create]
+    end
+  end
 end
