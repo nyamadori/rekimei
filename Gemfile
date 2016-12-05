@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   gem 'pry-byebug', platform: :mri
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'ffaker'
