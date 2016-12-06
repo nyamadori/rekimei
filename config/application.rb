@@ -18,6 +18,7 @@ module Rekimei
       g.javascripts false
       g.helper false
       g.test_framework :rspec,
+                       model_specs: false,
                        controller_specs: false,
                        view_specs: false, helper_specs: false, fixture: false
     end
