@@ -13,14 +13,15 @@ concern :Authentication do
       group = Group.find_by!(slug: group_slug)
 
       if sign_in_groups.include?(group)
-        session[:current_session] = session_for(group_slug).group.slug
+        session[:current_session] = session_for(group_slug)
       else
         redirect_to new_session_path, notice: 'Not forbidden'
       end
+
+      p session[:sessions], session[:current_session]
     end
 
     def initial_session_data
-      p sign_in_sessions
       session[:sessions] ||= []
       session[:current_session] ||= -1
     end
@@ -38,6 +39,11 @@ concern :Authentication do
       if session[:current_session].to_i >= session[:sessions].size
         session[:current_session] = session[:sessions].size - 1
       end
+
+      # clear cache
+      @sign_in_sessions = nil
+      @sign_in_accounts = nil
+      @sign_in_groups = nil
     end
 
     def sign_in_any?
@@ -66,7 +72,7 @@ concern :Authentication do
     end
 
     def current_account
-      @current_account ||= current_session.account
+      current_session.account
     end
 
     def current_session_index
@@ -74,15 +80,15 @@ concern :Authentication do
     end
 
     def current_group
-      @current_group ||= current_session.group
+      current_session.group
     end
 
     def current_session
-      @current_session ||= sign_in_sessions[current_session_index]
+      sign_in_sessions[current_session_index]
     end
 
     def session_for(group_slug)
-      sign_in_sessions.find { |s| s.group.slug == group_slug }
+      sign_in_sessions.index { |s| s.group.slug == group_slug }
     end
   end
 end
