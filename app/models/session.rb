@@ -3,19 +3,29 @@ class Session
 
   attr_accessor :email, :password, :group_slug, :group, :account
 
-  validates :email, presence: true, if: -> { !authenticated? }
-  validates :password, presence: true, if: -> { !authenticated? }
-  validates :group_slug, presence: true, if: -> { !authenticated? }
+  with_options unless: :authenticated? do |auth|
+    auth.validates :email, presence: true
+    auth.validates :password, presence: true
+    auth.validates :group_slug, presence: true
+  end
+
+  validate :authenticate, if: -> { errors.size.zero? }
 
   def authenticate
     @group = Group.find_by(slug: group_slug)
 
     if @group
       @account = @group.accounts.find_by(email: email)
-      return true if @account&.authenticate(password)
-    end
 
-    false
+      unless @account&.authenticate(password)
+        errors.add(
+          :base, :email_or_password_invalid,
+          message: 'Invalid Email or Password'
+        )
+      end
+    else
+      errors.add(:base, :no_group, message: "No group for #{group_slug}")
+    end
   end
 
   def authenticated?

@@ -4,12 +4,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    session = Session.new(session_params)
+    @session = Session.new(session_params)
 
-    if session.valid? && session.authenticate
-      sign_in(session)
+    if @session.valid?
+      sign_in(@session)
       redirect_to group_path(current_group.slug)
     else
+      p @session.errors
       render :new
     end
   end
