@@ -1,0 +1,8 @@
+= simple_form_for group do |f|
+  = f.input :slug
+  = f.input :name
+  = f.fields_for :accounts do |af|
+    = af.input :email
+    = af.input :password
+
+  = f.button :submit
