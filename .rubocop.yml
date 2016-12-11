@@ -1,2 +1,8 @@
 AllCops:
   TargetRubyVersion: 2.3
+
+Style/DoubleNegation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false

@@ -4,4 +4,12 @@ class Group < ApplicationRecord
 
   validates :slug, presence: true
   validates :name, presence: true
+
+  def to_param
+    slug
+  end
+
+  def authenticate(account)
+    accounts.exists?(account&.id)
+  end
 end
