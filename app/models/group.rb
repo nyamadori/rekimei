@@ -9,7 +9,7 @@ class Group < ApplicationRecord
     slug
   end
 
-  def authenticate(account)
+  def member?(account)
     accounts.exists?(account&.id)
   end
 end

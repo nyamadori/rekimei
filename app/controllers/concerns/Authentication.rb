@@ -10,12 +10,13 @@ concern :Authentication do
       initial_session_data
       return unless group_slug
 
-      group = Group.find_by!(slug: group_slug)
+      cs = sign_in_sessions.find { |s| s.group.slug == group_slug }
 
-      if sign_in_groups.include?(group)
+      if cs&.group.member?(cs.account)
         session[:current_session] = session_for(group_slug)
       else
-        redirect_to new_session_path, notice: 'Not forbidden'
+        sign_out(cs)
+        redirect_to new_session_path
       end
     end
 
