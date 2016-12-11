@@ -17,8 +17,6 @@ concern :Authentication do
       else
         redirect_to new_session_path, notice: 'Not forbidden'
       end
-
-      p session[:sessions], session[:current_session]
     end
 
     def initial_session_data
