@@ -19,8 +19,8 @@ RSpec.describe Session, type: :model do
         )
       end
 
-      it 'returns true' do
-        expect(session.authenticate).to be_truthy
+      it 'has no validation error' do
+        expect(session.valid?).to be_truthy
       end
     end
 
@@ -33,8 +33,9 @@ RSpec.describe Session, type: :model do
         )
       end
 
-      it 'returns true' do
-        expect(session.authenticate).to be_falsy
+      it 'has a validation error' do
+        session.validate
+        expect(session.errors[:base]).to include('Invalid Email or Password')
       end
     end
 
@@ -47,8 +48,9 @@ RSpec.describe Session, type: :model do
         )
       end
 
-      it 'returns true' do
-        expect(session.authenticate).to be_falsy
+      it 'has a validation error' do
+        session.validate
+        expect(session.errors[:base]).to include('No group for invalid')
       end
     end
 
@@ -61,8 +63,9 @@ RSpec.describe Session, type: :model do
         )
       end
 
-      it 'returns true' do
-        expect(session.authenticate).to be_falsy
+      it 'has a validation error' do
+        session.validate
+        expect(session.errors[:base]).to include('Invalid Email or Password')
       end
     end
   end
