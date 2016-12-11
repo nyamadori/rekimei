@@ -31,6 +31,11 @@ concern :Authentication do
 
       session[:sessions] << { account: s.account.id, group_slug: s.group.slug }
       session[:current_session] = session[:sessions].size - 1
+
+      # clear cache
+      @sign_in_sessions = nil
+      @sign_in_accounts = nil
+      @sign_in_groups = nil
     end
 
     def sign_out(s)
