@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
     if session.valid? && session.authenticate
       sign_in(session)
-      redirect_to '/'
+      redirect_to group_path(current_group.slug)
     else
       render :new
     end
