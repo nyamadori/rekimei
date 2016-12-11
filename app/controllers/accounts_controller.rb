@@ -1,9 +1,8 @@
 class AccountsController < ApplicationController
-  def new
-    @account = Account.new(account_params)
-  end
-
-  def create
+  def show
+    @group = Group.find_by!(slug: group_slug)
+    @member = @group.members.find(params[:member_id])
+    @account = @member.account
   end
 
   private
