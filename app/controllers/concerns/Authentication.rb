@@ -29,7 +29,10 @@ concern :Authentication do
     def sign_in(s)
       return if signed_in?(s)
 
-      session[:sessions] << { account: s.account.id, group_slug: s.group.slug }
+      session[:sessions] << {
+        'account' => s.account.id,
+        'group_slug' => s.group.slug
+      }
       session[:current_session] = session[:sessions].size - 1
 
       # clear cache
