@@ -1,0 +1,6 @@
+h2 Sign in your group
+= render partial: 'form', locals: { session: @session }
+hr
+
+h2 Create New Group
+= link_to 'Create Group', new_group_path, class: 'btn btn-info'

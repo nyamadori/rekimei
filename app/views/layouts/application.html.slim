@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title
+      | Rekimei
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        - if sign_in_any?
+          ul.nav.navbar-nav
+            li.dropdown
+              a.dropdown-toggle(data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
+                span.glyphicon.glyphicon-th-large
+                |  
+                = current_group.name
+                |  
+                span.caret
+              ul.dropdown-menu
+                - sign_in_accounts.each do |a|
+                  li
+                    = link_to a.group.name, group_path(a.group)
+                li.divider
+                li
+                  = link_to new_session_path do
+                    span.glyphicon.glyphicon-plus
+                    |  新規グループ
+          ul.nav.navbar-nav.navbar-right
+            li.dropdown
+              a.dropdown-toggle(data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
+                span.glyphicon.glyphicon-user
+                |  
+                = current_account.email
+                |  
+                span.caret
+              ul.dropdown-menu
+                li
+                  = link_to session_path, method: :delete do
+                    = "#{current_group.name} からサインアウト"
+    .container        
+      = yield
