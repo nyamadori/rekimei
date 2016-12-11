@@ -17,9 +17,6 @@ class SessionsController < ApplicationController
   def destroy
     sign_out(current_session)
 
-    p current_session
-    current_group = current_session&.group
-
     if current_group
       redirect_to group_path(current_group.slug)
     else

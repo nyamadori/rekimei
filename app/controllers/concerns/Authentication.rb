@@ -72,7 +72,7 @@ concern :Authentication do
     end
 
     def current_account
-      current_session.account
+      current_session&.account
     end
 
     def current_session_index
@@ -80,7 +80,7 @@ concern :Authentication do
     end
 
     def current_group
-      current_session.group
+      current_session&.group
     end
 
     def current_session
