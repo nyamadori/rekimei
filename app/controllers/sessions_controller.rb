@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
       sign_in(@session)
       redirect_to group_path(current_group.slug)
     else
-      p @session.errors
       render :new
     end
   end
