@@ -1,13 +1,25 @@
 class AccountsController < ApplicationController
-  def show
-    @group = Group.find_by!(slug: group_slug)
-    @member = @group.members.find(params[:member_id])
-    @account = @member.account
+  before_action :member, :account
+
+  def update
+    if account.update(account_params)
+      redirect_to action: :show
+    else
+      render :edit
+    end
   end
 
   private
 
+  def member
+    @member ||= current_group.members.find(params[:member_id])
+  end
+
+  def account
+    @account ||= member.account
+  end
+
   def account_params
-    params.permit(:account).require(:email, :password)
+    params.require(:account).permit(:email, :current_password, :new_password)
   end
 end
