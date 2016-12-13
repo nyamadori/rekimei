@@ -1,6 +1,6 @@
 class Account < ApplicationRecord
-  attr_accessor :current_password, :new_password
   has_secure_password
+  attr_accessor :current_password, :new_password
 
   has_one :member
   has_one :group, through: :member
@@ -14,7 +14,7 @@ class Account < ApplicationRecord
     up.validates :new_password, length: { minimum: 6 }
   end
 
-  before_update :update_password
+  before_update :update_password, if: :update_password?
 
   def update_password?
     current_password.present? && new_password.present?

@@ -19,7 +19,7 @@ RSpec.describe Account, type: :model do
     end
   end
 
-  describe 'when set current password and new password' do
+  describe 'when sets current password and new password' do
     let!(:account) { create(:account) }
 
     it 'updates a password' do
@@ -39,6 +39,16 @@ RSpec.describe Account, type: :model do
 
         expect(account.errors[:current_password]).to include('Invalid Password')
       end
+    end
+  end
+
+  describe 'when does not set current password and new password' do
+    let!(:account) { create(:account) }
+
+    it 'does not update a password' do
+      expect do
+        account.update({})
+      end.not_to change(account, :password) && change(account, :password_digest)
     end
   end
 end
