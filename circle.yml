@@ -1,0 +1,9 @@
+machine:
+  environment:
+    RAILS_ENV: test
+  ruby:
+    version: 2.3.3
+
+test:
+  override:
+    - bundle exec rubocop & bundle exec rspec
