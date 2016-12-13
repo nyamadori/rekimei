@@ -1,0 +1,5 @@
+= simple_form_for account, url: group_member_account_path(group, member) do |f|
+  = f.input :email
+  = f.input :current_password
+  = f.input :new_password
+  = f.button :submit
