@@ -17,7 +17,7 @@ class Account < ApplicationRecord
   before_update :update_password, if: :update_password?
 
   def update_password?
-    current_password.present? && new_password.present?
+    [current_password, new_password].any?(&:present?)
   end
 
   private
