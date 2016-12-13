@@ -4,18 +4,38 @@ RSpec.describe Account, type: :model do
   describe '#update_password?' do
     let!(:account) { create(:account) }
 
-    it 'returns true' do
-      account.current_password = 'password'
-      account.new_password = 'password'
+    context 'when both of current_password and new_password are present' do
+      it 'returns true' do
+        account.current_password = 'password'
+        account.new_password = 'password'
 
-      expect(account.update_password?).to be_truthy
+        expect(account.update_password?).to be_truthy
+      end
     end
 
-    it 'returns false' do
-      account.current_password = 'password'
-      account.new_password = ''
+    context 'when either of current_password and new_password are present' do
+      it 'returns true' do
+        account.current_password = 'password'
+        account.new_password = ''
 
-      expect(account.update_password?).to be_falsey
+        expect(account.update_password?).to be_truthy
+      end
+
+      it 'returns true' do
+        account.current_password = ''
+        account.new_password = 'password'
+
+        expect(account.update_password?).to be_truthy
+      end
+    end
+
+    context 'when current_password and new_password are not present' do
+      it 'returns true' do
+        account.current_password = ''
+        account.new_password = ''
+
+        expect(account.update_password?).to be_falsey
+      end
     end
   end
 
