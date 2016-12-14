@@ -18,4 +18,4 @@ table.table
       td
         = link_to '編集', edit_group_member_path(current_group, m)
         |  
-        = link_to '削除', group_member_path(current_group, m), method: :delete
+        = link_to '削除', group_member_path(current_group, m), method: :delete, data: { confirmation: '本当に削除しますか' }

@@ -28,6 +28,11 @@ class MembersController < ApplicationController
     end
   end
 
+  def destroy
+    member.destroy
+    redirect_to action: :index
+  end
+
   private
 
   def member
