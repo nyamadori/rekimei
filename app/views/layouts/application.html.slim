@@ -27,6 +27,9 @@ html
                   = link_to new_session_path do
                     span.glyphicon.glyphicon-plus
                     |  新規グループ
+          ul.nav.navbar-nav
+            li(class="#{MembersController === controller ? 'active' : ''}")
+              = link_to 'メンバー', group_members_path(current_group)
           ul.nav.navbar-nav.navbar-right
             li.dropdown
               a.dropdown-toggle(data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
