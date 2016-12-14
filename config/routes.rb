@@ -5,5 +5,7 @@ Rails.application.routes.draw do
     resources :members do
       resource :account
     end
+
+    resource :invitation, only: [:new, :create]
   end
 end
