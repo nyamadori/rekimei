@@ -1,5 +1,5 @@
 class Account < ApplicationRecord
-  has_secure_password
+  has_secure_password validations: false
   attr_accessor :current_password, :new_password
 
   has_one :member
