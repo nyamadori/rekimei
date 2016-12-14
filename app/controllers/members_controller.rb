@@ -5,6 +5,21 @@ class MembersController < ApplicationController
     @members = current_group.members
   end
 
+  def new
+    @member = Member.new
+    @member.build_profile
+  end
+
+  def create
+    @member = current_group.members.build(member_params)
+
+    if @member.save
+      redirect_to action: :index
+    else
+      render :new
+    end
+  end
+
   def update
     if member.update(member_params)
       redirect_to action: :index
