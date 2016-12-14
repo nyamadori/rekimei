@@ -1,0 +1,8 @@
+= simple_form_for invitation, url: group_invitation_path(group, invitation) do |f|
+  = f.fields_for :account do |af|
+    = af.input :email
+  = f.fields_for :profile do |pf|
+    = pf.input :first_name
+    = pf.input :last_name
+    = pf.input :school_id
+  = f.button :submit
