@@ -10,10 +10,10 @@ concern :Authentication do
       initial_session_data
       return unless group_slug
 
-      cs = sign_in_sessions.find { |s| s.group.slug == group_slug }
+      cs = session_for(group_slug)
 
       if cs&.group.member?(cs.account)
-        session[:current_session] = session_for(group_slug)
+        session[:current_session] = session_index_for(group_slug)
       else
         sign_out(cs)
         redirect_to new_session_path
@@ -94,8 +94,12 @@ concern :Authentication do
       sign_in_sessions[current_session_index]
     end
 
+    def session_index_for(group_slug)
+      sign_in_sessions.index { |s| s.group.slug == group_slug }.to_i
+    end
+
     def session_for(group_slug)
-      sign_in_sessions.index { |s| s.group.slug == group_slug }
+      sign_in_sessions[session_index_for(group_slug)]
     end
   end
 end
