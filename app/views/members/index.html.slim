@@ -14,7 +14,8 @@ table.table
       td= m.profile&.first_name
       td= m.profile&.last_name
       td= m.profile&.school_id
-      td= m.account&.email
+      td
+        = link_to 'アカウントを表示', group_member_account_path(m.group, m) if m.account
       td
         = link_to '編集', edit_group_member_path(current_group, m)
         |  
