@@ -1,3 +1,3 @@
 class Profile < ApplicationRecord
-  belongs_to :member
+  belongs_to :member, inverse_of: :profile
 end
