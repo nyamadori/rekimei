@@ -1,0 +1,17 @@
+table.table
+  tr
+    th 姓
+    th 名
+    th 学籍番号
+    th アカウント 
+    th
+  - @members.each do |m|
+    tr
+      td= m.profile&.first_name
+      td= m.profile&.last_name
+      td= m.profile&.schoolId
+      td= m.account&.email
+      td
+        = link_to '編集', edit_group_member_path(current_group, m)
+        |  
+        = link_to '削除', group_member_path(current_group, m), method: :delete
