@@ -7,8 +7,7 @@ class Invitation
   validate :validate_models
 
   def save
-    return unless valid?
-    member.save
+    member.save if valid?
   end
 
   def account
