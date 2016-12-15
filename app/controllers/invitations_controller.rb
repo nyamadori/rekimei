@@ -6,6 +6,7 @@ class InvitationsController < ApplicationController
   def create
     @invitation = Invitation.new(invitation_params)
     @invitation.group = current_group
+    @invitation.inviter = current_account
 
     if @invitation.save
       InvitationMailer.send_invitation(@invitation).deliver_now
