@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 concern :Authentication do
   included do
     helper_method :sign_in_accounts, :sign_in_groups,
