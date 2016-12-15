@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Account < ApplicationRecord
   has_secure_password
   attr_accessor :current_password, :new_password
