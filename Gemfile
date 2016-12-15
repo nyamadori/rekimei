@@ -21,6 +21,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'ffaker'
   gem 'rails-erd'
+  gem 'rubocop', require: false
 end
 
 group :development do
