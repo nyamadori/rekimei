@@ -1,7 +1,8 @@
 class Invitation
   include ActiveModel::Model
-  attr_accessor :group, :member, :account, :profile
-  attr_accessor :group, :account_attributes, :profile_attributes
+  attr_accessor :group, :member, :account, :profile, :inviter
+  attr_accessor :account_attributes, :profile_attributes
+  alias_attribute :invitee, :account
 
   validates :group, presence: true
   validate :validate_models
