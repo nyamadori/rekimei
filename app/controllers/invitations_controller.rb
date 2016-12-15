@@ -1,6 +1,6 @@
 class InvitationsController < ApplicationController
   def new
-    @invitation = Invitation.new
+    @invitation = Invitation.new(group: current_group)
   end
 
   def create
@@ -8,7 +8,7 @@ class InvitationsController < ApplicationController
     @invitation.group = current_group
 
     if @invitation.save
-      # InvitationMailer.send(@invitation)
+      InvitationMailer.send_invitation(@invitation).deliver_now
       redirect_to action: :new
     else
       render :new
