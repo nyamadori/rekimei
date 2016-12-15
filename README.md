@@ -8,7 +8,7 @@ Rekimei is a simple groupware for small-scale organization.
 
 * Member Directory
   - Make a list of your group
-  - Invite new member to join and management your group
+  - Invite a new member to join your group
 
 ## System Requirements
 
