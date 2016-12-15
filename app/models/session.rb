@@ -19,10 +19,7 @@ class Session
       @account = @group.accounts.find_by(email: email)
 
       unless @account&.authenticate(password)
-        errors.add(
-          :base, :email_or_password_invalid,
-          message: 'Invalid Email or Password'
-        )
+        errors.add(:base, :email_or_password_invalid, message: 'Invalid Email or Password')
       end
     else
       errors.add(:base, :no_group, message: "No group for #{group_slug}")
