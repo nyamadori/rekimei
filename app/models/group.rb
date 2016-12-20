@@ -10,4 +10,8 @@ class Group < ApplicationRecord
   def to_param
     slug
   end
+
+  def member?(account)
+    accounts.exists?(account.id)
+  end
 end
