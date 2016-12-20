@@ -1,6 +1,15 @@
 h1 Show Account
-= link_to 'Edit', edit_group_member_account_path(current_group, @member), class: 'btn btn-default'
+= link_to 'Edit', edit_group_account_path(current_group, @account), class: 'btn btn-default'
 hr
 p
   | Email: 
   = @account.email
+p
+  | First Name:
+  = @account.profile&.first_name
+p
+  | Last Name:
+  = @account.profile&.last_name
+p
+  | School ID:
+  = @account.profile&.school_id

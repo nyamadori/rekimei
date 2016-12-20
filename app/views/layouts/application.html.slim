@@ -28,8 +28,8 @@ html
                     span.glyphicon.glyphicon-plus
                     |  新規グループ
           ul.nav.navbar-nav
-            li(class="#{MembersController === controller ? 'active' : ''}")
-              = link_to 'メンバー', group_members_path(current_group)
+            li(class="#{AccountsController === controller ? 'active' : ''}")
+              = link_to 'メンバー', group_accounts_path(current_group)
           ul.nav.navbar-nav.navbar-right
             li.dropdown
               a.dropdown-toggle(data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
@@ -40,7 +40,7 @@ html
                 span.caret
               ul.dropdown-menu
                 li
-                  = link_to 'アカウントを表示', group_member_account_path(current_group, current_account.member)
+                  = link_to 'アカウントを表示', group_account_path(current_group, current_account)
                 li.divider
                 li
                   = link_to session_path, method: :delete do

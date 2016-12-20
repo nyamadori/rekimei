@@ -6,9 +6,9 @@ FactoryGirl.define do
 
     trait :with_accounts do
       after(:build) do |g|
-        g.members.build(account: build(:account))
-        g.members.build(account: build(:account))
-        g.members.build(account: build(:account))
+        g.accounts.build(attributes_for(:account))
+        g.accounts.build(attributes_for(:account))
+        g.accounts.build(attributes_for(:account))
       end
     end
   end
