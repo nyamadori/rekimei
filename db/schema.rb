@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161220010108) do
+ActiveRecord::Schema.define(version: 20161220011542) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",           default: "", null: false
@@ -36,7 +36,10 @@ ActiveRecord::Schema.define(version: 20161220010108) do
     t.text     "description", limit: 65535
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.integer  "account_id",                             null: false
+    t.index ["account_id"], name: "fk_rails_f44be28d09", using: :btree
   end
 
   add_foreign_key "accounts", "groups"
+  add_foreign_key "profiles", "accounts"
 end
