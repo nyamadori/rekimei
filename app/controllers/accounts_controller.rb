@@ -21,6 +21,9 @@ class AccountsController < ApplicationController
   end
 
   def account_params
-    params.require(:account).permit(:email, :current_password, :new_password)
+    params.require(:account).permit(
+      :email, :current_password, :new_password,
+      profile_attributes: [:id, :first_name, :last_name, :school_id]
+    )
   end
 end
