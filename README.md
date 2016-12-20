@@ -1,24 +1,28 @@
-# README
+# [WIP] Rekimei
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![CircleCI](https://circleci.com/gh/nyamadori/rekimei.svg?style=svg)](https://circleci.com/gh/nyamadori/rekimei)
 
-Things you may want to cover:
+Rekimei is a simple groupware for small-scale organization.
 
-* Ruby version
+## Feature
 
-* System dependencies
+* Member Directory
+  - Make a list of your group
+  - Invite a new member to join your group
 
-* Configuration
+## System Requirements
 
-* Database creation
+* \>= Ruby 2.3
+* \>= Rails 5
 
-* Database initialization
+## Install & Run application
 
-* How to run the test suite
+```
+$ bundle install
+$ mysql.server start
+$ rails s
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## What is the origin of the name “Rekimei”
 
-* Deployment instructions
-
-* ...
+In Japanese history, Rekimei (歴名) means list of someone's name.
