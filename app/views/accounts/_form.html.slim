@@ -1,5 +1,13 @@
-= simple_form_for account, url: group_member_account_path(group, member) do |f|
+= simple_form_for [group, account] do |f|
+  h2 Account
   = f.input :email
   = f.input :current_password
   = f.input :new_password
+
+  h2 Profile
+  = f.fields_for :profile, account.profile || account.build_profile do |pf|
+    = pf.input :first_name
+    = pf.input :last_name
+    = pf.input :school_id
+
   = f.button :submit

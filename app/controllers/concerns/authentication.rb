@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 concern :Authentication do
   included do
-    helper_method :sign_in_accounts, :sign_in_groups,
+    helper_method :sign_in_accounts, :sign_in_groups, :sign_in_sessions,
                   :current_group, :current_account,
                   :sign_in_any?
 
@@ -9,11 +9,13 @@ concern :Authentication do
 
     def authenticate!
       initial_session_data
+      clean_sessions
+
       return unless group_slug
 
       cs = session_for(group_slug)
 
-      if cs&.group.member?(cs.account)
+      if cs && cs.authenticated? && cs.group.member?(cs.account)
         session[:current_session] = session_index_for(group_slug)
       else
         sign_out(cs)
@@ -24,6 +26,10 @@ concern :Authentication do
     def initial_session_data
       session[:sessions] ||= []
       session[:current_session] ||= -1
+    end
+
+    def clean_sessions
+      @sign_in_sessions = sign_in_sessions.select(&:authenticated?)
     end
 
     def sign_in(s)
@@ -55,7 +61,8 @@ concern :Authentication do
     end
 
     def sign_in_any?
-      session[:sessions].present?
+      sign_in_sessions.present? &&
+        current_group.present? && current_account.present?
     end
 
     def signed_in?(s)
@@ -96,7 +103,7 @@ concern :Authentication do
     end
 
     def session_index_for(group_slug)
-      sign_in_sessions.index { |s| s.group.slug == group_slug }.to_i
+      sign_in_sessions.index { |s| s.group.slug == group_slug }&.to_i
     end
 
     def session_for(group_slug)

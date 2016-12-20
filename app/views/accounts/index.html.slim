@@ -1,0 +1,22 @@
+h1 メンバー一覧
+/ = link_to 'New Member', new_group__path, class: 'btn btn-primary'
+hr
+
+table.table
+  tr
+    th First Name
+    th Last Name
+    th School ID
+    th Account
+    th
+  - @accounts.each do |a|
+    tr
+      td= a.profile&.first_name
+      td= a.profile&.last_name
+      td= a.profile&.school_id
+      td
+        = link_to 'アカウントを表示', group_account_path(a.group, a)
+      td
+        = link_to '編集', edit_group_account_path(current_group, a)
+        |  
+        = link_to '削除', group_account_path(current_group, a), method: :delete, data: { confirmation: '本当に削除しますか' }

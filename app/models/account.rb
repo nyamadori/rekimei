@@ -3,9 +3,9 @@ class Account < ApplicationRecord
   has_secure_password
   attr_accessor :current_password, :new_password
 
-  has_one :member
-  has_one :group, through: :member
-  has_one :profile, through: :member
+  belongs_to :group, inverse_of: :accounts
+  has_one :profile, inverse_of: :account, dependent: :destroy
+  accepts_nested_attributes_for :profile
 
   validates :email, presence: true # TODO: Email のフォーマットバリデーション
   validates :password, length: { minimum: 6 }, allow_nil: true
