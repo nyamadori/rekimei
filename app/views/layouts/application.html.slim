@@ -28,7 +28,7 @@ html
                     span.glyphicon.glyphicon-plus
                     |  新規グループ
           ul.nav.navbar-nav
-            li(class="#{MembersController === controller ? 'active' : ''}")
+            li(class="#{AccountsController === controller ? 'active' : ''}")
               = link_to 'メンバー', group_accounts_path(current_group)
           ul.nav.navbar-nav.navbar-right
             li.dropdown

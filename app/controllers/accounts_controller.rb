@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 class AccountsController < ApplicationController
-  before_action :member, :account
+  before_action :account, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @accounts = current_group.accounts
+  end
 
   def update
     if account.update(account_params)
@@ -12,12 +16,8 @@ class AccountsController < ApplicationController
 
   private
 
-  def member
-    @member ||= current_group.members.find(params[:member_id])
-  end
-
   def account
-    @account ||= member.account
+    @account ||= current_group.accounts.find(params[:id])
   end
 
   def account_params
