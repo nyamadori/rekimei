@@ -6,10 +6,10 @@ p
   = @account.email
 p
   | First Name:
-  = @account.profile.first_name
+  = @account.profile&.first_name
 p
   | Last Name:
-  = @account.profile.last_name
+  = @account.profile&.last_name
 p
   | School ID:
-  = @account.profile.school_id
+  = @account.profile&.school_id
