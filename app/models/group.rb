@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class Group < ApplicationRecord
-  has_many :accounts
+  has_many :accounts, inverse_of: :group
 
   accepts_nested_attributes_for :accounts
 

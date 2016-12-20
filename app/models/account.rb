@@ -3,7 +3,7 @@ class Account < ApplicationRecord
   has_secure_password
   attr_accessor :current_password, :new_password
 
-  belongs_to :group
+  belongs_to :group, inverse_of: :accounts
   has_one :profile
 
   validates :email, presence: true # TODO: Email のフォーマットバリデーション
