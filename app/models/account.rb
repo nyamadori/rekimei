@@ -3,9 +3,8 @@ class Account < ApplicationRecord
   has_secure_password
   attr_accessor :current_password, :new_password
 
-  has_one :member
-  has_one :group, through: :member
-  has_one :profile, through: :member
+  belongs_to :group
+  has_one :profile
 
   validates :email, presence: true # TODO: Email のフォーマットバリデーション
   validates :password, length: { minimum: 6 }, allow_nil: true

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 class Group < ApplicationRecord
-  has_many :accounts, through: :members
-  has_many :members
+  has_many :accounts
 
   accepts_nested_attributes_for :accounts
 
@@ -10,9 +9,5 @@ class Group < ApplicationRecord
 
   def to_param
     slug
-  end
-
-  def member?(account)
-    accounts.exists?(account&.id)
   end
 end
