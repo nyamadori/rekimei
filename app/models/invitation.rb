@@ -1,6 +1,6 @@
 class Invitation
   include ActiveModel::Model
-  attr_accessor :group, :member, :account, :profile, :inviter
+  attr_accessor :group, :account, :profile, :inviter
   attr_accessor :account_attributes, :profile_attributes
   alias_attribute :invitee, :account
 
@@ -8,19 +8,15 @@ class Invitation
   validate :validate_models
 
   def save
-    member.save if valid?
+    group.save if valid?
   end
 
   def account
-    @account ||= member.build_account(account_attributes)
+    @account ||= group.accounts.build(account_attributes)
   end
 
   def profile
-    @profile ||= member.build_profile(profile_attributes)
-  end
-
-  def member
-    @member ||= group.members.build
+    @profile ||= account.build_profile(profile_attributes)
   end
 
   private
