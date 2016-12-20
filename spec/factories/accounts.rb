@@ -3,5 +3,6 @@ FactoryGirl.define do
   factory :account do
     email { FFaker::Internet.email }
     password 'password'
+    group
   end
 end
