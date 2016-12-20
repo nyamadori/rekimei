@@ -7,7 +7,8 @@ class Account < ApplicationRecord
   has_one :profile, inverse_of: :account, dependent: :destroy
   accepts_nested_attributes_for :profile
 
-  validates :email, presence: true # TODO: Email のフォーマットバリデーション
+  # TODO: Email のフォーマットバリデーション
+  validates :email, presence: true, uniqueness: { scope: :group_id }
   validates :password, length: { minimum: 6 }, allow_nil: true
 
   with_options if: :update_password?, on: :update do |up|
